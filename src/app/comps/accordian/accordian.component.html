@@ -1,0 +1,62 @@
+<form [formGroup]="formSection" (ngSubmit)="callingFunction()">
+  <h3>Bio Details</h3>
+
+  <cdk-accordion class="example-accordion">
+    <cdk-accordion-item
+      *ngFor="let item of items; let index = index"
+      #accordionItem="cdkAccordionItem"
+      class="example-accordion-item"
+      role="button"
+      tabindex="0"
+      [attr.id]="'accordion-header-' + index"
+      [attr.aria-expanded]="accordionItem.expanded"
+      [attr.aria-controls]="'accordion-body-' + index"
+    >
+      <div
+        class="example-accordion-item-header"
+        (click)="accordionItem.toggle()"
+      >
+        {{ item }}
+        <span class="example-accordion-item-description">
+          Click to {{ accordionItem.expanded ? "close" : "open" }}
+        </span>
+      </div>
+
+      <div
+        class="example-accordion-item-body"
+        role="region"
+        [style.display]="accordionItem.expanded ? '' : 'none'"
+        [attr.id]="'accordion-body-' + index"
+        [attr.aria-labelledby]="'accordion-header-' + index"
+      >
+        {{ item }}
+
+        <container-element [ngSwitch]="item">
+          <!-- the same view can be shown in more than one case -->
+          <b *ngSwitchCase="'Item 1'">.. .</b>
+          <app-wtf *ngSwitchCase="'app-wtf'">... </app-wtf>
+          <app-table *ngSwitchCase="'Item 3'">...</app-table>
+
+          <app-address *ngSwitchCase="'Address'" formGroupName="address"> </app-address>
+
+          <b *ngSwitchCase="'match_expression_3'">...</b>
+
+          <!--default case when there are no matches -->
+          <span *ngSwitchDefault> ddddddddddddddd </span>
+          <!-- <app-page-not-found *ngSwitchDefault> ddddddddddddddd </app-page-not-found> -->
+        </container-element>
+        <!-- AAAAAAAA {{ item }} vvvvvvv
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perferendis
+      excepturi incidunt ipsum deleniti labore, tempore non nam doloribus blanditiis
+      veritatis illo autem iure aliquid ullam rem tenetur deserunt velit culpa? -->
+      </div>
+    </cdk-accordion-item>
+  </cdk-accordion>
+
+  <button (click)="submitAccordian()">SUBMIT</button>
+  <button type="submit">Submit Application</button>
+
+  <!-- <app-address formGroupName="address"> </app-address> -->
+  <button type="button"  (click)="patch('addressInfo','dummyData')">Patch</button>
+  <pre>{{formSection.value |json }}</pre>
+</form>

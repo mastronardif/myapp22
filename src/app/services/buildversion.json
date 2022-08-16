@@ -1,0 +1,9 @@
+{
+  "name": "my-app",
+  "version": {
+    "branch": "tr3",
+    "commit": "0.0.889",
+    "description": "letscoach",
+    "date": "06/12/22"
+  }
+}

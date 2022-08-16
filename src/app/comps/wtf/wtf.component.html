@@ -1,0 +1,40 @@
+<p>wtf works! {{id}} <br/>{{now}}</p>
+
+<!-- <mat-toolbar color="primary">
+  Simple Loading Service with RxJS and HttpInterceptor
+</mat-toolbar>
+<mat-progress-spinner [mode]="'indeterminate'"></mat-progress-spinner> -->
+
+<button mat-button (click)="openDialog()">Open dialog</button>
+
+<p>
+  <input type="text" id="galleryId" name="galleryId" #galleryId>
+
+<button mat-button (click)="onRemove(galleryId.value)">onRemove</button>
+</p>
+
+
+<!-- <p><input type="text" id="username" name="username" #username></p>
+<button type="button" (click)="onRemove(+username.value)">Clickme</button> -->
+
+<h1> {{id}}</h1>
+
+
+<!-- <pre>{{bookCollection$ | async | json}}</pre>
+<br/>
+<pre>{{books$ | async | json}}</pre> -->
+
+albumIds$, allGallery$
+<pre>Unique Album Ids: {{albumIds$ | async }}</pre>
+<pre>Album 1: {{allGallery$ | async | json}}</pre>
+
+{{date}}<br/>
+{{date   | date: "mm-dd-yyyy"}}
+{{date   | date: "HH:mm:ss"}}
+<pre> {{ heroes$ | async  | json}}
+</pre>
+
+<form [formGroup]="formSection" >
+  <app-address *ngIf="true" formGroupName="address"> </app-address>
+</form>
+
