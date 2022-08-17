@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { mockOrgdata } from 'src/app/dummydata/orgdata';
-//import * as gDummy from '../../dummydata/dummys';
+import  {mockDataPSA}  from 'src/app/dummydata/psadata';
+import * as psaD from 'src/app/dummydata/psadata';
 //https://typeofnan.dev/an-easy-way-to-build-a-tree-with-object-references/
 
 @Component({
@@ -12,6 +13,8 @@ export class MyorgchartComponent implements OnInit {
   org22: any;
   root: any;
   orgData = mockOrgdata;
+  psaData = mockDataPSA; //psaD;
+
   // orgData11: OrgData= {
   //   name: "Iron Man",
   //   type: 'CEO',
@@ -73,17 +76,18 @@ export class MyorgchartComponent implements OnInit {
   //
   // TODO: move to a module
   myroot() {
-    const data = [
-      {  type: 'CEO', name: "Hawkeye1",children: [], id: 56, parentId: 62 },
-      {  type: 'CEO', name: "Hawkeye2",children: [], id: 81, parentId: 80 },
-      {  type: 'CEO', name: "Hawkeye3",children: [], id: 74, parentId: null },
-      {  type: 'CEO', name: "Hawkeye4",children: [], id: 76, parentId: 80 },
-      {  type: 'CEO', name: "Hawkeye5",children: [], id: 63, parentId: 62 },
-      {  type: 'CEO', name: "Hawkeye6",children: [], id: 80, parentId: 86 },
-      {  type: 'CEO', name: "Hawkeye7",children: [], id: 87, parentId: 86 },
-      {  type: 'CEO', name: "Hawkeye8",children: [], id: 62, parentId: 74 },
-      {  type: 'CEO', name: "Hawkeye9",children: [], id: 86, parentId: 74 },
-    ];
+    const data = this.psaData;
+    // const data00 = [
+    //   {  type: 'CEO', name: "Hawkeye1",children: [], id: 'a56', parentId: 'a62' },
+    //   {  type: 'CEO', name: "Hawkeye2",children: [], id: 'a81', parentId: 'a80' },
+    //   {  type: 'CEO', name: "Hawkeye3",children: [], id: 'a74', parentId: null },
+    //   {  type: 'CEO', name: "Hawkeye4",children: [], id: 'a76', parentId: 'a80' },
+    //   {  type: 'CEO', name: "Hawkeye5",children: [], id: 'a63', parentId: 'a62' },
+    //   {  type: 'CEO', name: "Hawkeye6",children: [], id: 'a80', parentId: 'a86' },
+    //   {  type: 'CEO', name: "Hawkeye7",children: [], id: 'a87', parentId: 'a86' },
+    //   {  type: 'CEO', name: "Hawkeye8",children: [], id: 'a62', parentId: 'a74' },
+    //   {  type: 'CEO', name: "Hawkeye9",children: [], id: 'a86', parentId: 'a74' },
+    // ];
 
     // const idMapping = data.reduce((acc, el, i) => {
     //   acc[el.id] = i;
