@@ -1,0 +1,15 @@
+table {
+  width: 100%;
+}
+
+button {
+  margin: 16px 8px;
+}
+
+.mat-row:nth-child(even){
+  background-color: rgb(248, 244, 244);
+}
+
+/* .mat-row:nth-child(odd){
+  background-color: black;
+} */

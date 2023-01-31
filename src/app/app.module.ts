@@ -78,6 +78,7 @@ import { environment } from 'src/environments/environment';
 import { SpinnerInterceptorService } from './core/services/spinner-interceptor.service';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { MyorgchartComponent } from './comps/myorgchart/myorgchart.component';
+import { TableDynamicColumnsExampleComponent } from './comps/tables/table-dynamic-columns-example/table-dynamic-columns-example';
 
 export const metaReducers: MetaReducer<any>[] = !environment.production
   ? [storeFreeze]
@@ -99,6 +100,7 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
     TableComponent,
     DialogBoxComponent,
     TableFromUrlComponent,
+    TableDynamicColumnsExampleComponent,
     DialogOverviewExampleDialog,
     GalleryComponent,
     SpinnerComponent,

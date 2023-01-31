@@ -12,6 +12,7 @@ import { TableFromUrlComponent } from './comps/table-from-url/table-from-url.com
 import { RootComponent } from './comps/root/root.component';
 import { GalleryComponent } from './comps/gallery/gallery.component';
 import { MyorgchartComponent } from './comps/myorgchart/myorgchart.component';
+import { TableDynamicColumnsExampleComponent } from './comps/tables/table-dynamic-columns-example/table-dynamic-columns-example';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'root',  component: RootComponent },
   { path: 'table',  component: TableComponent },
   { path: 'tablefromurl',  component: TableFromUrlComponent },
+  { path: 'tableDynamic',  component: TableDynamicColumnsExampleComponent },
   { path: 'tree',  component: TreeComponent },
   { path: 'myorgchart', component: MyorgchartComponent },
   { path: 'myorgchart/:id', component: MyorgchartComponent },
