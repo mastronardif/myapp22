@@ -1,8 +1,9 @@
 /* eslint-disable @angular-eslint/component-class-suffix */
 /* eslint-disable @angular-eslint/component-selector */
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+//import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable, switchMap, tap } from 'rxjs';
 import { HeroService } from 'src/app/services/hero.service';
@@ -56,7 +57,9 @@ export class WtfComponent implements OnInit, OnDestroy {
     //this.store.dispatch(removeBook({ bookId }));
   }
 
-  constructor(private store: Store<{ gallery: GalleryModel[] }>, private booksService: GoogleBooksService, private fb: FormBuilder, public dialog: MatDialog, private route: ActivatedRoute, private router: Router, private service: HeroService) {
+  constructor(private store: Store<{ gallery: GalleryModel[] }>, private booksService: GoogleBooksService, private fb: FormBuilder,
+   // @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialog: MatDialog, private route: ActivatedRoute, private router: Router, private service: HeroService) {
     // setInterval(() => {
     //   this.date = new Date()
     // }, 3000)
@@ -106,8 +109,12 @@ export class WtfComponent implements OnInit, OnDestroy {
     }
   }
 
+  dlgData =  {data: ['What','The','apple','orange']};
   openDialog() {
-    const dialogRef = this.dialog.open(DialogContentExampleDialog);
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig = this.dlgData;
+
+    const dialogRef = this.dialog.open(DialogContentExampleDialog, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
