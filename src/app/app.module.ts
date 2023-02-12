@@ -16,7 +16,7 @@ import { MatListModule } from '@angular/material/list';
 import { AppRoutingModule } from './app-routing.module';
 import {
   WtfComponent,
-  DialogContentExampleDialog,
+  //DialogContentExampleDialog,
 } from './comps/wtf/wtf.component';
 import { PageNotFoundComponent } from './comps/page-not-found/page-not-found.component';
 import { RootComponent } from './comps/root/root.component';
@@ -43,6 +43,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AccordianComponent } from './comps/accordian/accordian.component';
 import { DialogBoxComponent } from './comps/dialog-box/dialog-box.component';
+import { DialogContentExampleComponent } from './comps/wtf/dialog-content-example.component';
+
 import {
   TableFromUrlComponent,
   DialogOverviewExampleDialog,
@@ -90,7 +92,6 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
     AppComponent,
     NavbarComponent,
     WtfComponent,
-    DialogContentExampleDialog,
     PageNotFoundComponent,
     RootComponent,
     AddressComponent,
@@ -99,6 +100,7 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
     AccordianComponent,
     TableComponent,
     DialogBoxComponent,
+    DialogContentExampleComponent,
     TableFromUrlComponent,
     TableDynamicColumnsExampleComponent,
     DialogOverviewExampleDialog,

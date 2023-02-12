@@ -12,6 +12,7 @@ import { select, Store } from '@ngrx/store';
 import { albumCollectionByAlbumId, uniqueAlbumIds } from 'src/app/store/gallery.selector';
 import { GalleryModel } from '../gallery/gallery.model';
 import { removeBook } from 'src/app/store/gallery.action';
+import { DialogContentExampleComponent } from './dialog-content-example.component';
 
 //import { selectBookCollection, selectBooks } from '../../store/books.selectors';
 // import {
@@ -109,15 +110,22 @@ export class WtfComponent implements OnInit, OnDestroy {
     }
   }
 
-  dlgData =  {data: ['What','The','apple','orange']};
+  dlgData =  {data: ['What','The','apple','orange'], other:{lll: 'fff'}};
   openDialog() {
-    let dialogConfig = new MatDialogConfig();
-    dialogConfig = this.dlgData;
+    // let dialogConfig = new MatDialogConfig();
+    // dialogConfig = this.dlgData;
 
-    const dialogRef = this.dialog.open(DialogContentExampleDialog, dialogConfig);
+    //const dialogRef = this.dialog.open(DialogContentExampleDialog, dialogConfig);
+    const dialogRef = this.dialog.open(DialogContentExampleComponent, {
+      //width: '650px',
+      data: this.dlgData,
+    });
+
+
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      console.log(result);
     });
   }
 
@@ -126,8 +134,8 @@ export class WtfComponent implements OnInit, OnDestroy {
   //   this.now = Date.now();
   // }
 }
-@Component({
-  selector: 'dialog-content-example-dialog',
-  templateUrl: 'dialog-content-example-dialog.html',
-})
-export class DialogContentExampleDialog {}
+// @Component({
+//   selector: 'dialog-content-example-dialog',
+//   templateUrl: 'dialog-content-example-dialog.html',
+// })
+// export class DialogContentExampleDialog {}
