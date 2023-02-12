@@ -7,27 +7,123 @@ export interface UsersData {
   id: number;
 }
 
+export interface UserModel {
+  id: number;
+  value: string;
+}
+
 @Component({
   selector: 'app-dialog-content-example',
   templateUrl: './dialog-content-example.component.html',
-  //  `
-  //   <h1 mat-dialog-title>Dialog title</h1>
-  //   <div mat-dialog-content>{{data.message}}</div>
-  //   <div mat-dialog-actions>
-  //     <!-- <button mat-button (click)="onNoClick()">No Thanks</button>
-  //     <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Ok</button> -->
-  //   </div>
-  // `
+  styleUrls: [ './dialog-content-example.component.css' ]
 })
+
 export class DialogContentExampleComponent {
-
-  //action: string;
+  public activeItems: any[] = [];
   local_data: any;
+  public gData = {
+    left: [
+      { id: 1, value: '19November (191119)' },
+      { id: 2, value: '1st Priority Insurance Consultants, LLC (2358)' },
+    ],
+    right: [
+      { id: 6, value: 'Go Eagles' },
+      { id: 8, value: '(Hunter) Lynn Posey (2895)' },
+      { id: 9, value: '1st Alliance Ins (2335)' },
+    ],
+  };
 
-  constructor(public dialogRef: MatDialogRef<DialogContentExampleComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
+  public agentInView = [
+    { id: 1, value: '19November (191119)' },
+    { id: 2, value: '1st Priority Insurance Consultants, LLC (2358)' },
+    { id: 3, value: '4 State Insurance Agency, Inc. (11107)' },
+    { id: 4, value: 'A Plus Insurance (2225)' },
+    { id: 5, value: 'A Plus Insurance Agency, Inc. (3001)' },
+    { id: 6, value: 'A. C. HUEY AGENCY (3592)' },
+    { id: 7, value: 'A.J. Bartol (6010)' },
+  ];
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogContentExampleComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
     console.log('data', data);
-    this.local_data = {...data};
+    this.local_data = { ...data };
     //this.action = this.local_data.action;
   }
+
+  public moveToTheRight(): void {
+    this.move('agentInView', 'agentNotinView');
+  }
+
+  public moveToTheLeft(): void {
+    this.move('agentNotinView', 'agentInView');
+  }
+
+  public moveToXYZ(event: any) {
+    switch( event.target.id) {
+      case 'Left': {
+        this.moveToTheLeft();
+        //this.move('agentNotinView', 'agentInView');
+         break;
+      }
+      case 'Right': {
+        this.moveToTheRight();
+         break;
+      }
+      default: {
+         //statements;
+         break;
+      }
+   }
+    console.log('moveToXYZ', event, event.target.id);
+
+  }
+  public move(from: string, to: string): void {
+    console.log('from', from)
+    // let from00 =
+    //   from === 'agentNotinView' ? this.agentNotinView : this.agentInView;
+    // const to00 =
+    //   to === 'agentNotinView' ? this.agentNotinView : this.agentInView;
+    const wtf = (from==='agentNotinView') ? 'left':'right';
+    const wtfTo = (to==='agentInView') ? 'right':'left';
+      let aaa = this.gData[wtf];
+      this.gData[wtf] = this.gData[wtf].filter((item: any, i: number) => {
+        if (this.isInActiveItems(item)) {
+          this.gData[wtfTo].push(item);
+          return false;
+        } else {
+          return true;
+        }
+      });
+
+    // if needed
+    // sort if needed
+    this.gData[wtfTo].sort((a, b) => a.id > b.id ? 1 : -1);
+
+    // clean active items after action
+    this.activeItems.length = 0;
+    console.table( this.gData.left)
+    console.table( this.gData.right)
+
+  }
+
+  public toggleActiveItem(eventItem: any): void {
+    console.log(eventItem)
+    if (this.activeItems.find(item => item === eventItem)) {
+      this.activeItems = this.activeItems.filter(item => item !== eventItem);
+    } else {
+      this.activeItems.push(eventItem);
+    }
+  }
+
+  public isInActiveItems(eventItem: any): boolean {
+    return !!this.activeItems.find((item) => item === eventItem);
+  }
+
+  actionsList = 'Select All,Right,Left,Remove All';
+  actionButtons = this.actionsList.split(',').map((label, id) => ({
+    id:label,
+    label
+  }));
 }

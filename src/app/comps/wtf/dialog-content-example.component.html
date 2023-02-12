@@ -1,16 +1,6 @@
 <h2 mat-dialog-title>Personalize Dashboard </h2>
 <mat-dialog-content class="mat-typography">
 <hr/>
-  <!-- <mat-nav-list>
-    <mat-list-item *ngFor="let link of ['aaa', 'bbb']">
-       <a matListItemTitle href="...">{{ link }}</a>
-       <button mat-icon-button matListItemMeta>
-          <mat-icon>info</mat-icon>
-       </button>
-    </mat-list-item>
-  </mat-nav-list> -->
-
-
   <div style="display: flex;">
     <ul style="flex: 1;">
       <li style="background-color: rgb(209, 192, 192);"> LEFT </li>
@@ -40,55 +30,57 @@
     help and feedback with nearly every IDE and editor. All this comes together so you can focus
     on building amazing apps rather than trying to make the code work.</p>
 
-  <h3>Loved by millions</h3>
-  <p>From prototype through global deployment, Angular delivers the productivity and scalable
-    infrastructure that supports Google's largest applications.</p>
+  <h3>Style 001</h3>
+  <p>List of cols. Select the ones to hide</p>
 
-  <h3>What is Angular?</h3>
+  <h3>Sytle 002</h3>
+  <p>List one, two like Service Now.
+  </p>
 
-  <p>Angular is a platform that makes it easy to build applications with the web. Angular
-    combines declarative templates, dependency injection, end to end tooling, and integrated
-    best practices to solve development challenges. Angular empowers developers to build
-    applications that live on the web, mobile, or the desktop</p>
+  <hr/>
+  <h3>Style 003</h3>
+  <p>list 1,2 move left right.</p>
 
-  <h3>Architecture overview</h3>
+  <div style="display: flex;">
 
-  <p>Angular is a platform and framework for building client applications in HTML and TypeScript.
-  Angular is itself written in TypeScript. It implements core and optional functionality as a
-  set of TypeScript libraries that you import into your apps.</p>
+    <ul style="flex: 1;">
+        <li style="background-color: rgb(209, 192, 192);"> LEFT </li>
 
-  <p>The basic building blocks of an Angular application are NgModules, which provide a compilation
-  context for components. NgModules collect related code into functional sets; an Angular app is
-  defined by a set of NgModules. An app always has at least a root module that enables
-  bootstrapping, and typically has many more feature modules.</p>
+        <div style="background-color: grey;" class="card-body overflow-auto py-0">
+          <ul class="list-group list-group-flush"  *ngFor="let child of gData.left" name="agentNotInGroup">
+            <li class="list-group-item {{isInActiveItems(child) ? 'active' : ''}}" (click)="toggleActiveItem(child)">
+              <input type="checkbox"> {{child.value}}
+            </li>
+          </ul>
+        </div>
+      </ul>
 
-  <p>Components define views, which are sets of screen elements that Angular can choose among and
-  modify according to your program logic and data. Every app has at least a root component.</p>
+      <ul style="flex: 1;">
+        <li *ngFor="let link of this.actionButtons; index as idx">
+          <button id="{{link.id}}" (click)="moveToXYZ($event)"> {{link.label}}</button>
+        </li>
+      </ul>
 
-  <p>Components use services, which provide specific functionality not directly related to views.
-  Service providers can be injected into components as dependencies, making your code modular,
-  reusable, and efficient.</p>
+      <ul style="flex: 1;">
+        <li style="background-color: rgb(94, 175, 94);">RIGHT</li>
 
-  <p>Both components and services are simply classes, with decorators that mark their type and
-  provide metadata that tells Angular how to use them.</p>
-
-  <p>The metadata for a component class associates it with a template that defines a view. A
-  template combines ordinary HTML with Angular directives and binding markup that allow Angular
-  to modify the HTML before rendering it for display.</p>
-
-  <pre style="background-color: rgb(184, 90, 106);">{{this.local_data |json}}
-  </pre>
-  <pre style="background-color: pink;">{{data|json}}</pre>
+                <div style="background-color: rgb(219, 154, 154);" class="card-body overflow-auto py-0">
+                  <ul class="list-group list-group-flush" *ngFor="let child of gData.right"   name="agentInGroup">
+                    <li class="list-group-item {{isInActiveItems(child) ? 'active' : ''}}" (click)="toggleActiveItem(child)">
+                      <input type="checkbox">
+                      {{child.value}}
+                    </li>
+                  </ul>
+                </div>
+      </ul>
+    </div>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
   <button mat-button [mat-dialog-close]="data">Apply</button>
   <button mat-button [mat-dialog-close]="false">Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+  <button mat-button [mat-dialog-close]="gData" cdkFocusInitial>Install</button>
 </mat-dialog-actions>
 
-<pre style="background-color: rgb(184, 90, 106);">{{this.local_data |json}}
-</pre>
-<pre style="background-color: pink;">{{data|json}}</pre>
 
 
