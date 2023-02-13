@@ -121,18 +121,12 @@ export class WtfComponent implements OnInit, OnDestroy {
       data: this.dlgData,
     });
 
-
-
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
       console.log(result);
+      alert(JSON.stringify(result));
     });
   }
-
-  // myFunction() {
-  //   console.log(`wtf hello ${Date.now()}`);
-  //   this.now = Date.now();
-  // }
 }
 // @Component({
 //   selector: 'dialog-content-example-dialog',
