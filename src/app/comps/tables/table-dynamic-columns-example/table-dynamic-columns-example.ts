@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { HeroService } from 'src/app/services/hero.service';
-import { DialogContentTwolistComponent } from '../../wtf/dialog-content-twolist.component';
+import { DialogTwolistComponent } from 'src/app/shared/dialogtwolist/dialog-twolist.component';
 
 /**
  * @title Table dynamically changing the columns displayed
@@ -107,7 +107,7 @@ export class TableDynamicColumnsExampleComponent implements OnInit {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(DialogContentTwolistComponent, {
+    const dialogRef = this.dialog.open(DialogTwolistComponent, {
       width: '950px',
       data: this.dlgData,
     });

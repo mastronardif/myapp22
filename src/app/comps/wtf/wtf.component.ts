@@ -20,7 +20,7 @@ import {
 } from 'src/app/store/gallery.selector';
 import { GalleryModel } from '../gallery/gallery.model';
 import { removeBook } from 'src/app/store/gallery.action';
-import { DialogContentTwolistComponent } from './dialog-content-twolist.component';
+import { DialogTwolistComponent } from '../../shared/dialogtwolist/dialog-twolist.component';
 
 //import { selectBookCollection, selectBooks } from '../../store/books.selectors';
 // import {
@@ -135,7 +135,7 @@ export class WtfComponent implements OnInit, OnDestroy {
 
     //let data22 =   {...this.dlgData};
     //const dialogRef = this.dialog.open(DialogContentExampleDialog, dialogConfig);
-    const dialogRef = this.dialog.open(DialogContentTwolistComponent, {
+    const dialogRef = this.dialog.open(DialogTwolistComponent, {
       width: '950px',
       data: this.dlgData, //data22
       //data: this.dlgData,
