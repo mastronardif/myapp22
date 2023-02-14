@@ -43,7 +43,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AccordianComponent } from './comps/accordian/accordian.component';
 import { DialogBoxComponent } from './comps/dialog-box/dialog-box.component';
-import { DialogContentExampleComponent } from './comps/wtf/dialog-content-example.component';
+import { DialogContentTwolistComponent } from './comps/wtf/dialog-content-twolist.component';
 
 import {
   TableFromUrlComponent,
@@ -100,7 +100,7 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
     AccordianComponent,
     TableComponent,
     DialogBoxComponent,
-    DialogContentExampleComponent,
+    DialogContentTwolistComponent,
     TableFromUrlComponent,
     TableDynamicColumnsExampleComponent,
     DialogOverviewExampleDialog,

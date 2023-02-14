@@ -1,17 +1,26 @@
 /* eslint-disable @angular-eslint/component-class-suffix */
 /* eslint-disable @angular-eslint/component-selector */
 import { Component, OnInit, OnDestroy, Input, Inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  Validators,
+} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable, switchMap, tap } from 'rxjs';
 import { HeroService } from 'src/app/services/hero.service';
 import { GoogleBooksService } from 'src/app/book-list/books.service';
 import { select, Store } from '@ngrx/store';
-import { albumCollectionByAlbumId, uniqueAlbumIds } from 'src/app/store/gallery.selector';
+import {
+  albumCollectionByAlbumId,
+  uniqueAlbumIds,
+} from 'src/app/store/gallery.selector';
 import { GalleryModel } from '../gallery/gallery.model';
 import { removeBook } from 'src/app/store/gallery.action';
-import { DialogContentExampleComponent } from './dialog-content-example.component';
+import { DialogContentTwolistComponent } from './dialog-content-twolist.component';
 
 //import { selectBookCollection, selectBooks } from '../../store/books.selectors';
 // import {
@@ -25,11 +34,13 @@ import { DialogContentExampleComponent } from './dialog-content-example.componen
   styleUrls: ['./wtf.component.css'],
 })
 export class WtfComponent implements OnInit, OnDestroy {
-    // books$ = this.store.select(selectBooks);
+  // books$ = this.store.select(selectBooks);
   // bookCollection$ = this.store.select(selectBookCollection);
   selectedAlbumId = 1; //-1;
   albumIds$ = this.store.pipe(select(uniqueAlbumIds));
-  allGallery$ = this.store.pipe(select(albumCollectionByAlbumId(this.selectedAlbumId)));
+  allGallery$ = this.store.pipe(
+    select(albumCollectionByAlbumId(this.selectedAlbumId))
+  );
   // onAdd(bookId: string) {
   //   this.store.dispatch(addBook({ bookId }));
   // }
@@ -39,31 +50,35 @@ export class WtfComponent implements OnInit, OnDestroy {
   heroes$: Observable<any> | undefined;
   id: number = 0;
   // galleryId: string = '';
-  public now: number=321;
+  public now: number = 321;
   public date: Date | undefined;
 
-  formSection = new FormGroup({
-
-  });
+  formSection = new FormGroup({});
 
   onRemove(bookIds: string) {
-    bookIds.split(',').forEach(ee=>{console.log(+ee);
+    bookIds.split(',').forEach((ee) => {
+      console.log(+ee);
       console.log(` onRemove(bookId:${+ee})`);
-    this.store.dispatch(removeBook({bookId: +ee}));
-
-    })
+      this.store.dispatch(removeBook({ bookId: +ee }));
+    });
     //array1.forEach(element => console.log(element));
     //console.log(` onRemove(bookId:${bookId})`);
     //this.store.dispatch(removeBook({ bookId }));
   }
 
-  constructor(private store: Store<{ gallery: GalleryModel[] }>, private booksService: GoogleBooksService, private fb: FormBuilder,
-   // @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialog: MatDialog, private route: ActivatedRoute, private router: Router, private service: HeroService) {
+  constructor(
+    private store: Store<{ gallery: GalleryModel[] }>,
+    private booksService: GoogleBooksService,
+    private fb: FormBuilder,
+    // @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
+    private router: Router,
+    private service: HeroService
+  ) {
     // setInterval(() => {
     //   this.date = new Date()
     // }, 3000)
-
     // setInterval(this.myFunction, 1000);
   }
 
@@ -74,10 +89,10 @@ export class WtfComponent implements OnInit, OnDestroy {
 
     console.log(`wtf: init id(${this.id})`);
 
-
     this.heroes$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) =>
-        this.service.getInvoice(params.get('id')!))
+        this.service.getInvoice(params.get('id')!)
+      )
     );
 
     this.formSection = new FormGroup({
@@ -101,7 +116,7 @@ export class WtfComponent implements OnInit, OnDestroy {
     }
   }
 
- // dlgData =  {data: ['What','The','apple','orange'], other:{lll: 'fff'}};
+  // dlgData =  {data: ['What','The','apple','orange'], other:{lll: 'fff'}};
   dlgData = {
     left: [
       { id: 1, value: '19November (191119)' },
@@ -120,20 +135,26 @@ export class WtfComponent implements OnInit, OnDestroy {
 
     //let data22 =   {...this.dlgData};
     //const dialogRef = this.dialog.open(DialogContentExampleDialog, dialogConfig);
-    const dialogRef = this.dialog.open(DialogContentExampleComponent, {
+    const dialogRef = this.dialog.open(DialogContentTwolistComponent, {
       width: '950px',
-      data: this.dlgData //data22
+      data: this.dlgData, //data22
       //data: this.dlgData,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
       console.log(result);
-        let lefts = result.left.map((elm: { id: string, value: string }) => {return (elm.id+' - '+ elm.value)});
-        let rights = result.right.map((elm: { id: string, value: string }) => {return (elm.id+' - '+ elm.value)});
-      console.log('lefts', lefts);
-      //alert(JSON.stringify(result));
-      alert(JSON.stringify({LEFT:lefts,  RIGHT:rights},   null, 2));
+      if (result.left) {
+        let lefts = result.left.map((elm: { id: string; value: string }) => {
+          return elm.id + ' - ' + elm.value;
+        });
+        let rights = result.right.map((elm: { id: string; value: string }) => {
+          return elm.id + ' - ' + elm.value;
+        });
+        console.log('lefts', lefts);
+        //alert(JSON.stringify(result));
+        alert(JSON.stringify({ LEFT: lefts, RIGHT: rights }, null, 2));
+      }
     });
   }
 }

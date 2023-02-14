@@ -1,10 +1,16 @@
-import {Component, Inject, OnInit, ViewChild, ɵɵsetComponentScope} from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnInit,
+  ViewChild,
+  ɵɵsetComponentScope,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { HeroService } from 'src/app/services/hero.service';
-import { DialogContentExampleComponent } from '../../wtf/dialog-content-example.component';
+import { DialogContentTwolistComponent } from '../../wtf/dialog-content-twolist.component';
 
 /**
  * @title Table dynamically changing the columns displayed
@@ -20,30 +26,31 @@ export class TableDynamicColumnsExampleComponent implements OnInit {
   allColumns: string[] = [];
   displayedColumns: string[] = [];
   columnsToDisplay: string[] = this.displayedColumns.slice();
-  users: any[] =[];
+  users: any[] = [];
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatSort)
   sort!: MatSort;
 
   dlgData = {
     left: [
-      { id: 1, value: 'aaaa (191119)' },
-      { id: 2, value: 'bbbbbbb Priority Insurance Consultants, LLC (2358)' },
+      { id: 1, value: 'aaaa (zzz)' },
+      { id: 2, value: 'bbbbbbb Priority Insurance Consultants, LLC (yyy)' },
     ],
     right: [
-      { id: 6, value: '11111 Eagles' },
-      { id: 8, value: '(22222222unter) Lynn Posey (333)' },
-      { id: 9, value: '333333333 Alliance Ins (2335)' },
+      { id: 6, value: 'hhh Eagles' },
+      { id: 8, value: '(22222222unter) Lynn Posey (iiii)' },
+      { id: 9, value: '333333333 Alliance Ins (jjj)' },
     ],
   };
 
-  constructor(private service: HeroService, public dialog: MatDialog,) {}
+  constructor(private service: HeroService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.service
       .getXYZ('https://jsonplaceholder.typicode.com/users')
       .subscribe({
-        next: (v) => {console.log(v);
+        next: (v) => {
+          console.log(v);
           this.users = v;
           this.displayedColumns = Object.keys(this.users[0]);
 
@@ -60,18 +67,19 @@ export class TableDynamicColumnsExampleComponent implements OnInit {
   }
 
   listColumn(event: any) {
-    console.log(event)
+    console.log(event);
     const cols: string[] = event;
     // console.table(this.displayedColumns);
     console.table(this.columnsToDisplay);
     //this.columnsToDisplay= this.columnsToDisplay.filter(element => !cols.includes(element));
-    this.columnsToDisplay= this.allColumns.filter(element => !cols.includes(element));
+    this.columnsToDisplay = this.allColumns.filter(
+      (element) => !cols.includes(element)
+    );
     //console.log(ccc)
     //const updatedArray = removeElements(array, 'Value', this.displayedColumns);
     // const updatedArray =this.columnsToDisplay.filter((element) => {
     //   return element !== '';
     // });
-
   }
 
   // addColumn() {
@@ -99,19 +107,25 @@ export class TableDynamicColumnsExampleComponent implements OnInit {
   }
 
   openDialog() {
-     const dialogRef = this.dialog.open(DialogContentExampleComponent, {
+    const dialogRef = this.dialog.open(DialogContentTwolistComponent, {
       width: '950px',
-      data: this.dlgData
+      data: this.dlgData,
     });
 
-    dialogRef.afterClosed().subscribe((result: { left: { id: string; value: string; }[]; right: { id: string; value: string; }[]; }) => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
       console.log(result);
-        let lefts = result.left.map((elm: { id: string, value: string }) => {return (elm.id+' - '+ elm.value)});
-        let rights = result.right.map((elm: { id: string, value: string }) => {return (elm.id+' - '+ elm.value)});
-      console.log('lefts', lefts);
-      //alert(JSON.stringify(result));
-      alert(JSON.stringify({LEFT:lefts,  RIGHT:rights},   null, 2));
+      if (result.left) {
+        let lefts = result.left.map((elm: { id: string; value: string }) => {
+          return elm.id + ' - ' + elm.value;
+        });
+        let rights = result.right.map((elm: { id: string; value: string }) => {
+          return elm.id + ' - ' + elm.value;
+        });
+        console.log('lefts', lefts);
+        //alert(JSON.stringify(result));
+        alert(JSON.stringify({ LEFT: lefts, RIGHT: rights }, null, 2));
+      }
     });
   }
 }

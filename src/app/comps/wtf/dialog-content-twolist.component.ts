@@ -13,11 +13,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 // }
 
 @Component({
-  selector: 'app-dialog-content-example',
-  templateUrl: './dialog-content-example.component.html',
-  styleUrls: ['./dialog-content-example.component.css'],
+  selector: 'app-dialog-content-twolist',
+  templateUrl: './dialog-content-twolist.component.html',
+  styleUrls: ['./dialog-content-twolist.component.css'],
 })
-export class DialogContentExampleComponent {
+export class DialogContentTwolistComponent {
   public activeItems: any[] = [];
   local_data: any;
   public gData = {
@@ -43,7 +43,7 @@ export class DialogContentExampleComponent {
   // ];
 
   constructor(
-    public dialogRef: MatDialogRef<DialogContentExampleComponent>,
+    public dialogRef: MatDialogRef<DialogContentTwolistComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     //let data22 =   {...this.dlgData};
