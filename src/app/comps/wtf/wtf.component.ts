@@ -2,8 +2,7 @@
 /* eslint-disable @angular-eslint/component-selector */
 import { Component, OnInit, OnDestroy, Input, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-//import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable, switchMap, tap } from 'rxjs';
 import { HeroService } from 'src/app/services/hero.service';
@@ -75,14 +74,6 @@ export class WtfComponent implements OnInit, OnDestroy {
 
     console.log(`wtf: init id(${this.id})`);
 
-    //
-    // this.booksService
-    // .getBooks()
-    // .subscribe((books) => this.store.dispatch(retrievedBookList({ books })));
-
-    // const bookId = "X3iTzQEACAAJ";
-    // this.store.dispatch(addBook({ bookId }));
-    //
 
     this.heroes$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) =>
@@ -110,21 +101,39 @@ export class WtfComponent implements OnInit, OnDestroy {
     }
   }
 
-  dlgData =  {data: ['What','The','apple','orange'], other:{lll: 'fff'}};
+ // dlgData =  {data: ['What','The','apple','orange'], other:{lll: 'fff'}};
+  dlgData = {
+    left: [
+      { id: 1, value: '19November (191119)' },
+      { id: 2, value: '1st Priority Insurance Consultants, LLC (2358)' },
+    ],
+    right: [
+      { id: 6, value: 'Go Eagles' },
+      { id: 8, value: '(Hunter) Lynn Posey (333)' },
+      { id: 9, value: '1st Alliance Ins (2335)' },
+    ],
+  };
+
   openDialog() {
     // let dialogConfig = new MatDialogConfig();
     // dialogConfig = this.dlgData;
 
+    //let data22 =   {...this.dlgData};
     //const dialogRef = this.dialog.open(DialogContentExampleDialog, dialogConfig);
     const dialogRef = this.dialog.open(DialogContentExampleComponent, {
-      //width: '650px',
-      data: this.dlgData,
+      width: '950px',
+      data: this.dlgData //data22
+      //data: this.dlgData,
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
       console.log(result);
-      alert(JSON.stringify(result));
+        let lefts = result.left.map((elm: { id: string, value: string }) => {return (elm.id+' - '+ elm.value)});
+        let rights = result.right.map((elm: { id: string, value: string }) => {return (elm.id+' - '+ elm.value)});
+      console.log('lefts', lefts);
+      //alert(JSON.stringify(result));
+      alert(JSON.stringify({LEFT:lefts,  RIGHT:rights},   null, 2));
     });
   }
 }

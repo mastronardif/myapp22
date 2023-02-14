@@ -2,15 +2,15 @@ import { Component, Inject, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
-export interface UsersData {
-  name: string;
-  id: number;
-}
+// export interface UsersData {
+//   name: string;
+//   id: number;
+// }
 
-export interface UserModel {
-  id: number;
-  value: string;
-}
+// export interface UserModel {
+//   id: number;
+//   value: string;
+// }
 
 @Component({
   selector: 'app-dialog-content-example',
@@ -22,7 +22,7 @@ export class DialogContentExampleComponent {
   local_data: any;
   public gData = {
     left: [
-      { id: 1, value: '19November (191119)' },
+      { id: 1, value: '19November (zzzzzzzzzz)' },
       { id: 2, value: '1st Priority Insurance Consultants, LLC (2358)' },
     ],
     right: [
@@ -46,8 +46,11 @@ export class DialogContentExampleComponent {
     public dialogRef: MatDialogRef<DialogContentExampleComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    console.log('data', data);
-    this.local_data = { ...data };
+    //let data22 =   {...this.dlgData};
+    this.gData=   {...data}; //data;
+    console.log('constructor data', data);
+    //this.local_data = { ...data };
+
     //this.action = this.local_data.action;
   }
 
@@ -124,8 +127,7 @@ export class DialogContentExampleComponent {
 
   actionButtons = [
     { id: 'elect All', label: 'Select All' },
-    { id: 'Right', label: 'Right to Left' },
-    { id: 'Left', label: 'Left to Right' },
+    { id: 'Left', label: 'Left to Right' },    { id: 'Right', label: 'Right to Left' },
     { id: 'Remove All', label: 'Remove All' },
   ];
 }

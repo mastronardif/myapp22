@@ -1,8 +1,10 @@
 import {Component, Inject, OnInit, ViewChild, ɵɵsetComponentScope} from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { HeroService } from 'src/app/services/hero.service';
+import { DialogContentExampleComponent } from '../../wtf/dialog-content-example.component';
 
 /**
  * @title Table dynamically changing the columns displayed
@@ -23,7 +25,19 @@ export class TableDynamicColumnsExampleComponent implements OnInit {
   @ViewChild(MatSort)
   sort!: MatSort;
 
-  constructor(private service: HeroService) {}
+  dlgData = {
+    left: [
+      { id: 1, value: 'aaaa (191119)' },
+      { id: 2, value: 'bbbbbbb Priority Insurance Consultants, LLC (2358)' },
+    ],
+    right: [
+      { id: 6, value: '11111 Eagles' },
+      { id: 8, value: '(22222222unter) Lynn Posey (333)' },
+      { id: 9, value: '333333333 Alliance Ins (2335)' },
+    ],
+  };
+
+  constructor(private service: HeroService, public dialog: MatDialog,) {}
 
   ngOnInit() {
     this.service
@@ -82,5 +96,22 @@ export class TableDynamicColumnsExampleComponent implements OnInit {
       this.columnsToDisplay[currentIndex] = this.columnsToDisplay[randomIndex];
       this.columnsToDisplay[randomIndex] = temp;
     }
+  }
+
+  openDialog() {
+     const dialogRef = this.dialog.open(DialogContentExampleComponent, {
+      width: '950px',
+      data: this.dlgData
+    });
+
+    dialogRef.afterClosed().subscribe((result: { left: { id: string; value: string; }[]; right: { id: string; value: string; }[]; }) => {
+      console.log(`Dialog result: ${result}`);
+      console.log(result);
+        let lefts = result.left.map((elm: { id: string, value: string }) => {return (elm.id+' - '+ elm.value)});
+        let rights = result.right.map((elm: { id: string, value: string }) => {return (elm.id+' - '+ elm.value)});
+      console.log('lefts', lefts);
+      //alert(JSON.stringify(result));
+      alert(JSON.stringify({LEFT:lefts,  RIGHT:rights},   null, 2));
+    });
   }
 }

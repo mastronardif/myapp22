@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>Personalize Dashboard </h2>
 <mat-dialog-content class="mat-typography">
-<hr/>
-  <div style="display: flex;">
+
+  <!-- <div style="display: flex;">
     <ul style="flex: 1;">
       <li style="background-color: rgb(209, 192, 192);"> LEFT </li>
       <li *ngFor="let link of '12ave345'.split(''); index as idx"><input type="checkbox">
@@ -20,26 +20,31 @@
         <input type="checkbox">
         Item {{idx + 1}}</li>
     </ul>
-  </div>
-
   <hr/>
+  </div> -->
+
 
   <h3>Instructions</h3>
-  <p>Bla bla bla .... features quickly with simple, declarative templates. Extend the template language with
-    your own components and use a wide array of components. Get immediate Angular-specific
-    help and feedback with nearly every IDE and editor. All this comes together so you can focus
-    on building amazing apps rather than trying to make the code work.</p>
+  <p>Bla bla bla .... Select columns to show or hide.</p>
 
   <h3>Style 001</h3>
   <p>List of cols. Select the ones to hide</p>
+  <mat-form-field appearance="fill">
+    <mat-label> Show/Remove Columns</mat-label>
+    <mat-select
 
+      multiple
+     >
+      <mat-option *ngFor="let child of gData.left" [value]="child.value"
+        >{{child.value}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+<hr/>
   <h3>Sytle 002</h3>
   <p>List one, two like Service Now.
-  </p>
-
-  <hr/>
-  <h3>Style 003</h3>
-  <p>list 1,2 move left right.</p>
+  list 1,2 move left right.</p>
 
   <div style="display: flex;">
 
@@ -47,9 +52,9 @@
         <li style="background-color: rgb(209, 192, 192);"> LEFT </li>
 
         <div style="background-color: grey;" class="card-body overflow-auto py-0">
-          <ul class="list-group list-group-flush"  *ngFor="let child of gData.left" name="agentNotInGroup">
-            <li class="list-group-item {{isInActiveItems(child) ? 'active' : ''}}" (click)="toggleActiveItem(child)">
-              <input type="checkbox"> {{child.value}}
+          <ul class="list-group list-group-flush"  *ngFor="let child of gData.left" name="letfGroup">
+            <li class="list-group-item {{isInActiveItems(child) ? 'active' : ''}}">
+              <input type="checkbox" (click)="toggleActiveItem(child)"> {{child.value}}
             </li>
           </ul>
         </div>
@@ -65,9 +70,9 @@
         <li style="background-color: rgb(94, 175, 94);">RIGHT</li>
 
                 <div style="background-color: rgb(219, 154, 154);" class="card-body overflow-auto py-0">
-                  <ul class="list-group list-group-flush" *ngFor="let child of gData.right"   name="agentInGroup">
-                    <li class="list-group-item {{isInActiveItems(child) ? 'active' : ''}}" (click)="toggleActiveItem(child)">
-                      <input type="checkbox">
+                  <ul class="list-group list-group-flush" *ngFor="let child of gData.right"   name="rightGroup">
+                    <li class="list-group-item {{isInActiveItems(child) ? 'active' : ''}}">
+                      <input type="checkbox" (click)="toggleActiveItem(child)">
                       {{child.value}}
                     </li>
                   </ul>
