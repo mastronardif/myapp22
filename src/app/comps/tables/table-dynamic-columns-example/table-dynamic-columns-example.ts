@@ -60,6 +60,16 @@ export class TableDynamicColumnsExampleComponent implements OnInit {
           //this.displayedColumnsAll = this.displayedColumns.concat(this.displayedColumnsExtra);
           this.dataSource = new MatTableDataSource(v);
           this.dataSource.sort = this.sort;
+
+          //
+          console.table(this.displayedColumns);
+          this.dlgData.left = this.displayedColumns.map((element, index) => ({ id: index, value: element }));
+          this.dlgData.right = [];
+
+          console.table(this.dlgData);
+          //console.table(newArray);
+
+
         },
         error: (e) => console.error(`\tERROR occured: ${JSON.stringify(e)}`),
         complete: () => console.info('complete'),
@@ -75,12 +85,22 @@ export class TableDynamicColumnsExampleComponent implements OnInit {
     this.columnsToDisplay = this.allColumns.filter(
       (element) => !cols.includes(element)
     );
-    //console.log(ccc)
+    console.log(this.columnsToDisplay);
     //const updatedArray = removeElements(array, 'Value', this.displayedColumns);
     // const updatedArray =this.columnsToDisplay.filter((element) => {
     //   return element !== '';
     // });
   }
+
+  listColumn22(colsToDisplay: any[]) {
+    console.log(colsToDisplay);
+    //const cols: string[] = event;
+    // console.table(this.displayedColumns);
+    console.table(this.columnsToDisplay);
+    //this.columnsToDisplay= this.columnsToDisplay.filter(element => !cols.includes(element));
+    this.columnsToDisplay = colsToDisplay;
+  }
+
 
   // addColumn() {
   //   const randomColumn = Math.floor(Math.random() * this.displayedColumns.length);
@@ -124,7 +144,11 @@ export class TableDynamicColumnsExampleComponent implements OnInit {
         });
         console.log('lefts', lefts);
         //alert(JSON.stringify(result));
-        alert(JSON.stringify({ LEFT: lefts, RIGHT: rights }, null, 2));
+        //alert(JSON.stringify({ LEFT: lefts, RIGHT: rights }, null, 2));
+        rights = result.right.map((elm: { id: string; value: string }) => {
+           return elm.value;
+        });
+        this.listColumn22(rights)
       }
     });
   }

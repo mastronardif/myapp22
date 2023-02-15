@@ -126,7 +126,7 @@ export class DialogTwolistComponent {
   }
 
   actionButtons = [
-    { id: 'elect All', label: 'Select All' },
+    { id: 'Select All', label: 'Select All' },
     { id: 'Left', label: 'Left to Right' },    { id: 'Right', label: 'Right to Left' },
     { id: 'Remove All', label: 'Remove All' },
   ];
