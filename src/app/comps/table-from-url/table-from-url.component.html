@@ -20,10 +20,17 @@
     </td>
   </ng-container>
 
+
+  <ng-container *ngFor="let item of [gINFO]; let ii = index" matColumnDef="{{ item }}">
+    <th mat-header-cell *matHeaderCellDef>  <mat-icon (click)="editUser(item, 'get info')">edit</mat-icon> </th>
+    <td mat-cell *matCellDef="let element">
+    </td>
+  </ng-container>
+
   <!-- <tr mat-header-row *matHeaderRowDef="displayedColumnsAll"></tr> -->
-  <tr mat-header-row *matHeaderRowDef="displayedColumns.concat(displayedColumnsExtra)"></tr>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns.concat(displayedColumnsExtra, gINFO)"></tr>
   <!-- <tr mat-row *matRowDef="let row; columns: displayedColumnsAll"></tr> -->
-  <tr mat-row *matRowDef="let row; columns: displayedColumns.concat(displayedColumnsExtra)"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns.concat(displayedColumnsExtra, gINFO)"></tr>
 </table>
 
 <pre>
@@ -32,6 +39,6 @@
   <li *ngFor="let item of displayedColumns.concat(displayedColumnsExtra); index as i; ">{{item}}</li>
 
   col Names = {{displayedColumns}}
-fld name = {{getZZZ(0)}}
-  {{users|json}}
+  fld name = {{getZZZ(0)}}
+  Users: {{users|json}}
 </pre>

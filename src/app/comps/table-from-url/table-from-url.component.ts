@@ -61,8 +61,9 @@ export class TableFromUrlComponent implements OnInit {
   //displayedColumnsAll: string[] = [];
   dataSource!: MatTableDataSource<any>;
   //user;
-
-  users: any[] =[]; //| undefined;
+  gINFO = 'INFO';
+  gUrl = '';
+  users: any[] = []; //| undefined;
   //colNames:string[] = [];
 
   @ViewChild(MatSort)
@@ -74,9 +75,12 @@ export class TableFromUrlComponent implements OnInit {
 
   ngOnInit() {
     this.service
-      .getXYZ('https://jsonplaceholder.typicode.com/users')
+      //.getXYZ('https://jsonplaceholder.typicode.com/users')
+      //.getXYZ('http://localhost:8080/api/data')
+      .getXYZ('http://127.0.0.1:8091/tutorial-server-0.0.1-SNAPSHOT/api/data')
       .subscribe({
-        next: (v) => {console.log(v);
+        next: (v) => {
+          console.log(v);
           this.users = v;
           this.displayedColumns = Object.keys(this.users[0]);
           //this.displayedColumnsExtra.push('action');
@@ -122,13 +126,25 @@ export class TableFromUrlComponent implements OnInit {
   //   this.dataSource = new MatTableDataSource(this.users);
   // }
 
-   editUser(action: string, user: any) {
-     // switch on action
+  editUser(action: string, user: any) {
+    // switch on action
     console.log(JSON.stringify(action));
     switch (action) {
       case 'edit':
         console.log(JSON.stringify(user));
         alert(JSON.stringify(user));
+        break;
+
+      case this.gINFO:
+        // console.log(JSON.stringify(user));
+        // alert(JSON.stringify('url= '+ this.gUrl));
+        let url = prompt("Please enter a url:", this.gUrl);
+        if (url == null || url == "") {
+          ;
+        } else {
+          this.getUrlData(url);
+          //this.getUrlData('https://jsonplaceholder.typicode.com/users');
+        }
         break;
 
       default:
@@ -137,25 +153,46 @@ export class TableFromUrlComponent implements OnInit {
     }
     //  console.log(JSON.stringify(user));
     //  alert(JSON.stringify(user));
-  //   const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-  //     width: '250px',
-  //     data: user,
-  //   });
+    //   const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+    //     width: '250px',
+    //     data: user,
+    //   });
 
-  //   dialogRef.afterClosed().subscribe((result) => {
-  //     this.user = user;
-  //   });
-   }
+    //   dialogRef.afterClosed().subscribe((result) => {
+    //     this.user = user;
+    //   });
+  }
 
   getZZZ(fldIndex: number): string {
     if (this.users && this.users[0]) {
-
-
-    //Object.keys(this.users[0])[0]
-    return Object.keys(this.users[0])[0];
+      //Object.keys(this.users[0])[0]
+      return Object.keys(this.users[0])[0];
+    }
+    return '';
   }
-  return '';
+
+  getUrlData(url: string) {
+    this.service
+      //.getXYZ('https://jsonplaceholder.typicode.com/users')
+      //.getXYZ('http://localhost:8080/api/data')
+      // .getXYZ('http://127.0.0.1:8091/tutorial-server-0.0.1-SNAPSHOT/api/data')
+      .getXYZ(url)
+      .subscribe({
+        next: (v) => {
+          console.log(v);
+          this.users = v;
+          this.displayedColumns = Object.keys(this.users[0]);
+          //this.displayedColumnsExtra.push('action');
+          //this.displayedColumnsAll = this.displayedColumns.concat(this.displayedColumnsExtra);
+          this.dataSource = new MatTableDataSource(v);
+          this.dataSource.sort = this.sort;
+        },
+        error: (e) => console.error(`\tERROR occured: ${JSON.stringify(e)}`),
+        complete: () => console.info('complete'),
+        //console.log(this.users);
+      });
   }
+
 }
 
 @Component({
