@@ -13,6 +13,7 @@ import { RootComponent } from './comps/root/root.component';
 import { GalleryComponent } from './comps/gallery/gallery.component';
 import { MyorgchartComponent } from './comps/myorgchart/myorgchart.component';
 import { TableDynamicColumnsExampleComponent } from './comps/tables/table-dynamic-columns-example/table-dynamic-columns-example';
+import { MylistComponent } from './comps/mylist/mylist.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,9 @@ const routes: Routes = [
 
   { path: 'wtf',  component: WtfComponent },
   { path: 'wtf/:id', component: WtfComponent },
+
+  //{ path: 'mylist',  component: DashboardComponent },
+  { path: 'mylist/:id',  component: MylistComponent },
 
 
 

@@ -8,12 +8,12 @@
     [opened]="(isHandset$ | async) === false"
   >
     <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
+    <mat-nav-list matSort>
       <a mat-list-item href="#">*R Link 1</a>
       <a mat-list-item href="#">*R Link 2</a>
       <a mat-list-item href="/wtf">*R Link 3/wtf</a>
 
-      <a mat-list-item [routerLink]="['/accordian']">accordian</a>
+      <a [routerLink]="['/accordian']">accordian</a>
       <a mat-list-item [routerLink]="['/address']">address</a>
       <a mat-list-item [routerLink]="['/dashboard']">dashboard</a>
       <a mat-list-item [routerLink]="['/gallery']">gallery</a>
@@ -24,6 +24,7 @@
       <a mat-list-item [routerLink]="['/wtf']">wtf</a>
       <a mat-list-item [routerLink]="['/wtf', 123]">/wtf/id</a>
       <a mat-list-item [routerLink]="['/wtf', now]">/wtf/{{now}}</a>
+      <a mat-list-item [routerLink]="['/mylist', now]">/mylist/{{now}}</a>
 
     </mat-nav-list>
   </mat-sidenav>

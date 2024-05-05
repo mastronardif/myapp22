@@ -47,6 +47,7 @@ export class WtfComponent implements OnInit, OnDestroy {
 
   private ooo$!: any;
   //hero$!: Observable<any>;
+  list22: any[] = [{}];
   heroes$: Observable<any> | undefined;
   id: number = 0;
   // galleryId: string = '';
@@ -95,6 +96,8 @@ export class WtfComponent implements OnInit, OnDestroy {
       )
     );
 
+    this.list22 = this.theList();
+
     this.formSection = new FormGroup({
       address: new FormGroup({
         company: new FormControl(''),
@@ -114,6 +117,27 @@ export class WtfComponent implements OnInit, OnDestroy {
     if (this.ooo$) {
       this.ooo$.unsubscribe();
     }
+  }
+
+  theList() : any[] {
+    //return this.dlgData.left;
+
+    const originalArray = [
+      { id: 1, name: 'John', nick: '',  age: 25, city: 'New York' },
+      { id: 2, name: 'Alice',nick: 'Ally', age: 30, city: 'San Francisco' },
+      { id: 3, name: 'Bob',  nick: 'Bobby',   age: 22, city: 'Seattle' },
+    ];
+    const newArray11 = originalArray.map(item => ({ id: item.id, name: item.name }));
+
+    const newArray = originalArray.map(item =>{
+      const idLength = item.id + item.name.length;
+      const uppercaseName = item.name.toUpperCase() + '- ' + item.nick ?? item.name;
+      return { ...item, idLength, name: uppercaseName };
+    });
+
+    return newArray;
+
+
   }
 
   // dlgData =  {data: ['What','The','apple','orange'], other:{lll: 'fff'}};
