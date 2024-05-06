@@ -22,6 +22,8 @@ const routes: Routes = [
     outlet: 'popup'
   },
 
+  { path: 'lazy', loadChildren: () => import('./lazyboy/lazyboy.module').then(m => m.LazyboyModule) },
+
   { path: 'accordian',  component: AccordianComponent },
   { path: 'address',  component: AddressComponent },
   { path: 'dashboard',  component: DashboardComponent },
@@ -34,15 +36,11 @@ const routes: Routes = [
   { path: 'myorgchart', component: MyorgchartComponent },
   { path: 'myorgchart/:id', component: MyorgchartComponent },
 
-
   { path: 'wtf',  component: WtfComponent },
   { path: 'wtf/:id', component: WtfComponent },
 
   //{ path: 'mylist',  component: DashboardComponent },
   { path: 'mylist/:id',  component: MylistComponent },
-
-
-
 
   { path: '',   redirectTo: '/myapp', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }

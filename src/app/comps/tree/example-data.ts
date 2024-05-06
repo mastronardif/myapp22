@@ -8,6 +8,7 @@ export const files = [
         name: 'comps',
         type: 'folder',
         children: [
+          { name: '/lazy', type: 'route' },
           {
             name: 'table with shit',
             type: 'folder',
