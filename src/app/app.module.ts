@@ -82,6 +82,8 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { MyorgchartComponent } from './comps/myorgchart/myorgchart.component';
 import { TableDynamicColumnsExampleComponent } from './comps/tables/table-dynamic-columns-example/table-dynamic-columns-example';
 import { MylistComponent } from './comps/mylist/mylist.component';
+import { HighlightDirective } from './mydirectives/highlight.directive';
+import { CamelCasePipe } from './pipes/camel-case.pipe';
 //import { LazyboyComponent } from './lazyboy/lazyboy.component';
 
 export const metaReducers: MetaReducer<any>[] = !environment.production
@@ -109,7 +111,9 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
     GalleryComponent,
     SpinnerComponent,
     MyorgchartComponent,
-    MylistComponent
+    MylistComponent,
+    HighlightDirective,
+    CamelCasePipe
     //LazyboyComponent,
     //CircleSpinnerComponent
   ],

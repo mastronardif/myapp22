@@ -111,6 +111,19 @@ export class WtfComponent implements OnInit, OnDestroy {
         shipping: new FormControl(''),
       }),
     });
+
+    //
+    const numbers = [1, 2, 3, 4, 5];
+
+// Using map to square each number
+const squaredNumbers = numbers.map(num => num * num);
+console.log('squaredNumbers', squaredNumbers);
+
+// Using reduce to calculate the sum of the squared numbers
+const sumOfSquaredNumbers = squaredNumbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+console.log('sumOfSquaredNumbers', sumOfSquaredNumbers);
+
+    //
   }
 
   ngOnDestroy() {
